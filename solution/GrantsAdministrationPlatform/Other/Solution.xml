@@ -520,14 +520,6 @@
         <Dependent type="300" schemaName="gap_integratedscoringchecklist_a1c7f" displayName="Integrated Scoring Checklist" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="1" schemaName="gap_documenttemplate" displayName="Document Template" solution="Active" />
-        <Dependent type="aiskillconfig" displayName="ais_FormFillFieldOptOut_gap_documenttemplate_gap_configurationjson" id.uniquename="ais_FormFillFieldOptOut_gap_documenttemplate_gap_configurationjson" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="1" schemaName="gap_documenttemplate" displayName="Document Template" solution="Active" />
-        <Dependent type="aiskillconfig" displayName="ais_FormFillFieldOptOut_gap_documenttemplate_gap_documentid" id.uniquename="ais_FormFillFieldOptOut_gap_documenttemplate_gap_documentid" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="1" schemaName="mspp_entityform" displayName="Basic Form" solution="PowerPages_Apps (1.0.2605.0)">
           <package appName="Power Pages Core Package" version="1.1.2605.258">PowerPages_Core (1.1.2605.258)</package>
         </Required>
@@ -612,14 +604,6 @@
       <MissingDependency>
         <Required type="2" schemaName="address1_utcoffset" displayName="address1_utcoffset" parentSchemaName="account" solution="System (5.0)" />
         <Dependent type="2" schemaName="address1_utcoffset" displayName="address1_utcoffset" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="2" schemaName="gap_configurationjson" displayName="Configuration JSON" parentSchemaName="gap_documenttemplate" parentDisplayName="Document Template" solution="Active" />
-        <Dependent type="aiskillconfig" displayName="ais_FormFillFieldOptOut_gap_documenttemplate_gap_configurationjson" id.uniquename="ais_FormFillFieldOptOut_gap_documenttemplate_gap_configurationjson" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="2" schemaName="gap_documentid" displayName="Document ID" parentSchemaName="gap_documenttemplate" parentDisplayName="Document Template" solution="Active" />
-        <Dependent type="aiskillconfig" displayName="ais_FormFillFieldOptOut_gap_documenttemplate_gap_documentid" id.uniquename="ais_FormFillFieldOptOut_gap_documenttemplate_gap_documentid" />
       </MissingDependency>
       <MissingDependency>
         <Required type="20" displayName="BusinessApplicationPlatformRole" solution="S2SApplicationRoles (1.0.0.126)" id="{02123b67-66ae-4a69-8cdc-6473b94ad1a9}">
