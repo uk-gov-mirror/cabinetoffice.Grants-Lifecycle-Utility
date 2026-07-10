@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.26062.150" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26062.150" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26062.00150">
+<ImportExportXml version="9.2.26063.147" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26063.147" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26063.00147">
   <SolutionManifest>
     <UniqueName>GrantsAdministrationPlatform</UniqueName>
     <LocalizedNames>
@@ -624,14 +624,14 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Desktop Flows Machine User" solution="MicrosoftFlowExtensionsCore (1.10.4.0)" id="{169ead94-a7e8-42c5-9ae8-d81205dfee77}">
-          <package appName="MicrosoftFlowExtensionsCore" version="1.10.4.0">MicrosoftFlowExtensionsAnchor (1.10.4.0)</package>
+        <Required type="20" displayName="Desktop Flows Machine User" solution="MicrosoftFlowExtensionsCore (1.10.9.0)" id="{169ead94-a7e8-42c5-9ae8-d81205dfee77}">
+          <package appName="MicrosoftFlowExtensionsCore" version="1.10.9.0">MicrosoftFlowExtensionsAnchor (1.10.9.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Sustainability BusinessUnit - ingest - full access Role" solution="msdyn_InsightsAppPlatform (1.0.3.99)" id="{180b3494-0503-ed11-82e6-000d3a33db7e}">
-          <package appName="InsightsAppPlatformApp Package" version="1.0.3.99">InsightsAppPlatformApp_Anchor (1.0.3.99)</package>
+        <Required type="20" displayName="Sustainability BusinessUnit - ingest - full access Role" solution="msdyn_InsightsAppPlatform (1.0.3462.1)" id="{180b3494-0503-ed11-82e6-000d3a33db7e}">
+          <package appName="InsightsAppPlatformApp Package" version="1.0.3462.1">InsightsAppPlatformApp_Anchor (1.0.3462.1)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
@@ -642,8 +642,8 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Dataflow Maker" solution="msdyn_InsightsAppPlatform (1.0.3.99)" id="{1f6c957f-9851-4dbe-ab1c-508c06faa8be}">
-          <package appName="InsightsAppPlatformApp Package" version="1.0.3.99">InsightsAppPlatformApp_Anchor (1.0.3.99)</package>
+        <Required type="20" displayName="Dataflow Maker" solution="msdyn_InsightsAppPlatform (1.0.3462.1)" id="{1f6c957f-9851-4dbe-ab1c-508c06faa8be}">
+          <package appName="InsightsAppPlatformApp Package" version="1.0.3462.1">InsightsAppPlatformApp_Anchor (1.0.3462.1)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
@@ -684,8 +684,8 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Desktop Flows Machine Owner" solution="MicrosoftFlowExtensionsCore (1.10.4.0)" id="{313995f9-4a4a-4d4a-afd1-c892da78e13e}">
-          <package appName="MicrosoftFlowExtensionsCore" version="1.10.4.0">MicrosoftFlowExtensionsAnchor (1.10.4.0)</package>
+        <Required type="20" displayName="Desktop Flows Machine Owner" solution="MicrosoftFlowExtensionsCore (1.10.9.0)" id="{313995f9-4a4a-4d4a-afd1-c892da78e13e}">
+          <package appName="MicrosoftFlowExtensionsCore" version="1.10.9.0">MicrosoftFlowExtensionsAnchor (1.10.9.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
@@ -696,7 +696,7 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Service Deleter" solution="AuthorizationCore (1.131.0.0)" id="{3b305bc7-5cf5-464b-985e-d6237f6496f1}">
+        <Required type="20" displayName="Service Deleter" solution="AuthorizationCore (1.134.0.0)" id="{3b305bc7-5cf5-464b-985e-d6237f6496f1}">
           <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
@@ -726,7 +726,7 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Service Reader" solution="AuthorizationCore (1.131.0.0)" id="{494d392f-d3f4-42ba-af49-30c6f41e6093}">
+        <Required type="20" displayName="Service Reader" solution="AuthorizationCore (1.134.0.0)" id="{494d392f-d3f4-42ba-af49-30c6f41e6093}">
           <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
@@ -781,14 +781,14 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Service Writer" solution="AuthorizationCore (1.131.0.0)" id="{68f2d372-e1a5-4298-9a93-4b39757caf93}">
+        <Required type="20" displayName="Service Writer" solution="AuthorizationCore (1.134.0.0)" id="{68f2d372-e1a5-4298-9a93-4b39757caf93}">
           <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Desktop Flow Machine Configuration Admin" solution="MicrosoftFlowExtensionsCore (1.10.4.0)" id="{6b860c71-0e4e-ec11-b1b5-000d3a6ed5b3}">
-          <package appName="MicrosoftFlowExtensionsCore" version="1.10.4.0">MicrosoftFlowExtensionsAnchor (1.10.4.0)</package>
+        <Required type="20" displayName="Desktop Flow Machine Configuration Admin" solution="MicrosoftFlowExtensionsCore (1.10.9.0)" id="{6b860c71-0e4e-ec11-b1b5-000d3a6ed5b3}">
+          <package appName="MicrosoftFlowExtensionsCore" version="1.10.9.0">MicrosoftFlowExtensionsAnchor (1.10.9.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
@@ -799,14 +799,14 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Sustainability all - ingest - full access Role" solution="msdyn_InsightsAppPlatform (1.0.3.99)" id="{72322043-f211-ed11-b83e-00224832b6bb}">
-          <package appName="InsightsAppPlatformApp Package" version="1.0.3.99">InsightsAppPlatformApp_Anchor (1.0.3.99)</package>
+        <Required type="20" displayName="Sustainability all - ingest - full access Role" solution="msdyn_InsightsAppPlatform (1.0.3462.1)" id="{72322043-f211-ed11-b83e-00224832b6bb}">
+          <package appName="InsightsAppPlatformApp Package" version="1.0.3462.1">InsightsAppPlatformApp_Anchor (1.0.3462.1)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Desktop Flows AI Application User" solution="MicrosoftFlowExtensionsCore (1.10.4.0)" id="{726d11d6-d9cf-4503-ade9-d6a4be7fa095}">
-          <package appName="MicrosoftFlowExtensionsCore" version="1.10.4.0">MicrosoftFlowExtensionsAnchor (1.10.4.0)</package>
+        <Required type="20" displayName="Desktop Flows AI Application User" solution="MicrosoftFlowExtensionsCore (1.10.9.0)" id="{726d11d6-d9cf-4503-ade9-d6a4be7fa095}">
+          <package appName="MicrosoftFlowExtensionsCore" version="1.10.9.0">MicrosoftFlowExtensionsAnchor (1.10.9.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
@@ -823,8 +823,8 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Knowledge Quality Service" solution="msdyn_PowerAIExtensionsBase (1.1.3407.3)" id="{7ca59d1b-b547-f011-877a-6045bd0653f0}">
-          <package appName="PowerAIExtensions Package" version="1.0.1.1524">PowerAIExtensions_Anchor (1.0.1.1524)</package>
+        <Required type="20" displayName="Knowledge Quality Service" solution="msdyn_PowerAIExtensionsBase (1.1.3466.1)" id="{7ca59d1b-b547-f011-877a-6045bd0653f0}">
+          <package appName="PowerAIExtensions Package" version="1.1.3466.1">PowerAIExtensions_Anchor (1.1.3466.1)</package>
           <package appName="PowerAIExtensions Package" version="1.1.3407.3">msdyn_PowerAIExtensionsSC (1.1.3407.3)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
@@ -836,8 +836,8 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Power Automate AI Flows Application User" solution="MicrosoftFlowExtensionsCore (1.10.4.0)" id="{84012ef2-00bd-412e-8654-b1e3a90feafc}">
-          <package appName="MicrosoftFlowExtensionsCore" version="1.10.4.0">MicrosoftFlowExtensionsAnchor (1.10.4.0)</package>
+        <Required type="20" displayName="Power Automate AI Flows Application User" solution="MicrosoftFlowExtensionsCore (1.10.9.0)" id="{84012ef2-00bd-412e-8654-b1e3a90feafc}">
+          <package appName="MicrosoftFlowExtensionsCore" version="1.10.9.0">MicrosoftFlowExtensionsAnchor (1.10.9.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
@@ -878,13 +878,13 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Sustainability all - full access Role" solution="msdyn_InsightsAppPlatform (1.0.3.99)" id="{96aa4895-5ac2-ec11-a7b6-00224830446f}">
-          <package appName="InsightsAppPlatformApp Package" version="1.0.3.99">InsightsAppPlatformApp_Anchor (1.0.3.99)</package>
+        <Required type="20" displayName="Sustainability all - full access Role" solution="msdyn_InsightsAppPlatform (1.0.3462.1)" id="{96aa4895-5ac2-ec11-a7b6-00224830446f}">
+          <package appName="InsightsAppPlatformApp Package" version="1.0.3462.1">InsightsAppPlatformApp_Anchor (1.0.3462.1)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="App Opener" solution="AuthorizationCore (1.131.0.0)" id="{979144c2-989b-41a5-a146-6b3ea4130e8c}">
+        <Required type="20" displayName="App Opener" solution="AuthorizationCore (1.134.0.0)" id="{979144c2-989b-41a5-a146-6b3ea4130e8c}">
           <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
@@ -896,8 +896,8 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Desktop Flows Machine Application User" solution="MicrosoftFlowExtensionsCore (1.10.4.0)" id="{9f572d55-6090-493b-904a-3956bdc55343}">
-          <package appName="MicrosoftFlowExtensionsCore" version="1.10.4.0">MicrosoftFlowExtensionsAnchor (1.10.4.0)</package>
+        <Required type="20" displayName="Desktop Flows Machine Application User" solution="MicrosoftFlowExtensionsCore (1.10.9.0)" id="{9f572d55-6090-493b-904a-3956bdc55343}">
+          <package appName="MicrosoftFlowExtensionsCore" version="1.10.9.0">MicrosoftFlowExtensionsAnchor (1.10.9.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
@@ -1022,8 +1022,8 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Fabric AI Skill Role" solution="msdyn_InsightsAppPlatform (1.0.3.99)" id="{d6e926ad-4afc-42fb-97f1-6e50c2ef174e}">
-          <package appName="InsightsAppPlatformApp Package" version="1.0.3.99">InsightsAppPlatformApp_Anchor (1.0.3.99)</package>
+        <Required type="20" displayName="Fabric AI Skill Role" solution="msdyn_InsightsAppPlatform (1.0.3462.1)" id="{d6e926ad-4afc-42fb-97f1-6e50c2ef174e}">
+          <package appName="InsightsAppPlatformApp Package" version="1.0.3462.1">InsightsAppPlatformApp_Anchor (1.0.3462.1)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
@@ -1064,8 +1064,8 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Power Policy App User Role" solution="msft_powerpolicy (1.0.0.219)" id="{e9a54b07-f763-45a1-88e7-0b67bbe18cf2}">
-          <package appName="PowerPolicyApp Package" version="1.0.0.219">msft_powerpolicyProd (1.0.0.219)</package>
+        <Required type="20" displayName="Power Policy App User Role" solution="msft_powerpolicy (9.2.3421.1)" id="{e9a54b07-f763-45a1-88e7-0b67bbe18cf2}">
+          <package appName="PowerPolicyApp Package" version="9.2.3421.1">msft_powerpolicyProd (9.2.3421.1)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
@@ -1082,26 +1082,26 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Sustainability BusinessUnit - full access Role" solution="msdyn_InsightsAppPlatform (1.0.3.99)" id="{ee0bc8b2-4bfe-ec11-82e5-0022482d500e}">
-          <package appName="InsightsAppPlatformApp Package" version="1.0.3.99">InsightsAppPlatformApp_Anchor (1.0.3.99)</package>
+        <Required type="20" displayName="Sustainability BusinessUnit - full access Role" solution="msdyn_InsightsAppPlatform (1.0.3462.1)" id="{ee0bc8b2-4bfe-ec11-82e5-0022482d500e}">
+          <package appName="InsightsAppPlatformApp Package" version="1.0.3462.1">InsightsAppPlatformApp_Anchor (1.0.3462.1)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Desktop Flows Machine User Can Share" solution="MicrosoftFlowExtensionsCore (1.10.4.0)" id="{ee18dcf2-6f83-4cd7-aa5c-1d8a88947d51}">
-          <package appName="MicrosoftFlowExtensionsCore" version="1.10.4.0">MicrosoftFlowExtensionsAnchor (1.10.4.0)</package>
+        <Required type="20" displayName="Desktop Flows Machine User Can Share" solution="MicrosoftFlowExtensionsCore (1.10.9.0)" id="{ee18dcf2-6f83-4cd7-aa5c-1d8a88947d51}">
+          <package appName="MicrosoftFlowExtensionsCore" version="1.10.9.0">MicrosoftFlowExtensionsAnchor (1.10.9.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Desktop Flows Runtime Application User" solution="MicrosoftFlowExtensionsCore (1.10.4.0)" id="{ee2c8e11-6d57-4c5d-9f84-659c0db132bb}">
-          <package appName="MicrosoftFlowExtensionsCore" version="1.10.4.0">MicrosoftFlowExtensionsAnchor (1.10.4.0)</package>
+        <Required type="20" displayName="Desktop Flows Runtime Application User" solution="MicrosoftFlowExtensionsCore (1.10.9.0)" id="{ee2c8e11-6d57-4c5d-9f84-659c0db132bb}">
+          <package appName="MicrosoftFlowExtensionsCore" version="1.10.9.0">MicrosoftFlowExtensionsAnchor (1.10.9.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Desktop Flows Module Developer" solution="MicrosoftFlowExtensionsCore (1.10.4.0)" id="{ee7bc749-3dd6-45ac-b95d-a3031463380b}">
-          <package appName="MicrosoftFlowExtensionsCore" version="1.10.4.0">MicrosoftFlowExtensionsAnchor (1.10.4.0)</package>
+        <Required type="20" displayName="Desktop Flows Module Developer" solution="MicrosoftFlowExtensionsCore (1.10.9.0)" id="{ee7bc749-3dd6-45ac-b95d-a3031463380b}">
+          <package appName="MicrosoftFlowExtensionsCore" version="1.10.9.0">MicrosoftFlowExtensionsAnchor (1.10.9.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
@@ -1148,81 +1148,81 @@
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="20" displayName="Federated Knowledge Role" solution="msdyn_PowerAIExtensionsBase (1.1.3407.3)" id="{ffadce64-3542-4bf1-a83a-ac9941104680}">
-          <package appName="PowerAIExtensions Package" version="1.0.1.1524">PowerAIExtensions_Anchor (1.0.1.1524)</package>
+        <Required type="20" displayName="Federated Knowledge Role" solution="msdyn_PowerAIExtensionsBase (1.1.3466.1)" id="{ffadce64-3542-4bf1-a83a-ac9941104680}">
+          <package appName="PowerAIExtensions Package" version="1.1.3466.1">PowerAIExtensions_Anchor (1.1.3466.1)</package>
           <package appName="PowerAIExtensions Package" version="1.1.3407.3">msdyn_PowerAIExtensionsSC (1.1.3407.3)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="FAQ Document" id="{f55dadbe-f84e-421a-b8e1-a338edcf9123}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="26" schemaName="Power Pages Users" displayName="Power Pages Users" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.131.0.0)" id="{1fe05f14-0074-49e3-b55d-0af1fd0a2b85}">
+        <Required type="26" schemaName="Power Pages Users" displayName="Power Pages Users" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.134.0.0)" id="{1fe05f14-0074-49e3-b55d-0af1fd0a2b85}">
           <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="Review" id="{68e77518-a7b4-43c3-aafc-9a899a8032b3}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="26" schemaName="Soft deleted Users" displayName="Soft deleted Users" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.131.0.0)" id="{5fda842a-004b-42b4-a611-b93c2c69667e}">
+        <Required type="26" schemaName="Soft deleted Users" displayName="Soft deleted Users" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.134.0.0)" id="{5fda842a-004b-42b4-a611-b93c2c69667e}">
           <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="Review" id="{68e77518-a7b4-43c3-aafc-9a899a8032b3}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="26" schemaName="Stub Users" displayName="Stub Users" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.131.0.0)" id="{490b1410-d231-46b0-b5fa-60017b21ab14}">
+        <Required type="26" schemaName="Stub Users" displayName="Stub Users" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.134.0.0)" id="{490b1410-d231-46b0-b5fa-60017b21ab14}">
           <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="Review" id="{68e77518-a7b4-43c3-aafc-9a899a8032b3}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="26" schemaName="Users deleted in tenant but exist in the environment" displayName="Users deleted in tenant but exist in the environment" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.131.0.0)" id="{19487f2f-8405-4d59-8f8b-4eda98d4f302}">
+        <Required type="26" schemaName="Users deleted in tenant but exist in the environment" displayName="Users deleted in tenant but exist in the environment" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.134.0.0)" id="{19487f2f-8405-4d59-8f8b-4eda98d4f302}">
           <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="Review" id="{68e77518-a7b4-43c3-aafc-9a899a8032b3}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="60" displayName="account contact card" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{29de27bc-a257-4f29-99cf-bab4a84e688f}">
-          <package appName="msdynce_AppCommon" version="9.0.26043.10001">msdynce_AppCommonAnchor (9.0.26043.10001)</package>
+          <package appName="msdynce_AppCommon" version="9.0.26063.10001">msdynce_AppCommonAnchor (9.0.26063.10001)</package>
         </Required>
         <Dependent type="80" schemaName="gap_DEMO" displayName="Grant Life-cycle Utility (GLU) - Beta Service" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="60" displayName="Live Persona Card Form" parentDisplayName="Contact" solution="msdynce_AppCommonPatch201904 (9.0.26043.10001)" id="{449faa0e-f471-48ec-87d0-4719909546d2}">
-          <package appName="msdynce_AppCommon" version="9.0.26043.10001">msdynce_AppCommonAnchor (9.0.26043.10001)</package>
+        <Required type="60" displayName="Live Persona Card Form" parentDisplayName="Contact" solution="msdynce_AppCommonPatch201904 (9.0.26063.10001)" id="{449faa0e-f471-48ec-87d0-4719909546d2}">
+          <package appName="msdynce_AppCommon" version="9.0.26063.10001">msdynce_AppCommonAnchor (9.0.26063.10001)</package>
         </Required>
         <Dependent type="80" schemaName="gap_DEMO" displayName="Grant Life-cycle Utility (GLU) - Beta Service" />
       </MissingDependency>
       <MissingDependency>
         <Required type="60" displayName="Contact Quick Create" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}">
-          <package appName="msdynce_AppCommon" version="9.0.26043.10001">msdynce_AppCommonAnchor (9.0.26043.10001)</package>
+          <package appName="msdynce_AppCommon" version="9.0.26063.10001">msdynce_AppCommonAnchor (9.0.26063.10001)</package>
         </Required>
         <Dependent type="80" schemaName="gap_DEMO" displayName="Grant Life-cycle Utility (GLU) - Beta Service" />
       </MissingDependency>
       <MissingDependency>
         <Required type="60" displayName="contact card" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{707fc57b-c5e6-471b-a180-e37ed28a38e2}">
-          <package appName="msdynce_AppCommon" version="9.0.26043.10001">msdynce_AppCommonAnchor (9.0.26043.10001)</package>
+          <package appName="msdynce_AppCommon" version="9.0.26063.10001">msdynce_AppCommonAnchor (9.0.26063.10001)</package>
         </Required>
         <Dependent type="80" schemaName="gap_DEMO" displayName="Grant Life-cycle Utility (GLU) - Beta Service" />
       </MissingDependency>
       <MissingDependency>
         <Required type="60" displayName="Social Profiles" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{7bb87dfd-ec3e-4ed9-8e3e-5725d3067295}">
-          <package appName="msdynce_AppCommon" version="9.0.26043.10001">msdynce_AppCommonAnchor (9.0.26043.10001)</package>
+          <package appName="msdynce_AppCommon" version="9.0.26063.10001">msdynce_AppCommonAnchor (9.0.26063.10001)</package>
         </Required>
         <Dependent type="80" schemaName="gap_DEMO" displayName="Grant Life-cycle Utility (GLU) - Beta Service" />
       </MissingDependency>
       <MissingDependency>
         <Required type="60" displayName="Contact Quick Form" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{bdb0ae1c-32fa-4374-b637-8dafe107bc44}">
-          <package appName="msdynce_AppCommon" version="9.0.26043.10001">msdynce_AppCommonAnchor (9.0.26043.10001)</package>
+          <package appName="msdynce_AppCommon" version="9.0.26063.10001">msdynce_AppCommonAnchor (9.0.26063.10001)</package>
         </Required>
         <Dependent type="80" schemaName="gap_DEMO" displayName="Grant Life-cycle Utility (GLU) - Beta Service" />
       </MissingDependency>
       <MissingDependency>
         <Required type="60" displayName="Contact Reference Panel" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{d880c3cf-80e2-42f3-82f9-24d040d09f17}">
-          <package appName="msdynce_AppCommon" version="9.0.26043.10001">msdynce_AppCommonAnchor (9.0.26043.10001)</package>
+          <package appName="msdynce_AppCommon" version="9.0.26063.10001">msdynce_AppCommonAnchor (9.0.26063.10001)</package>
         </Required>
         <Dependent type="80" schemaName="gap_DEMO" displayName="Grant Life-cycle Utility (GLU) - Beta Service" />
       </MissingDependency>
       <MissingDependency>
         <Required type="60" displayName="Recent Cases and Entitlements" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{f3b707fb-3b5f-45f9-9c6b-5e573bb5d19e}">
-          <package appName="msdynce_AppCommon" version="9.0.26043.10001">msdynce_AppCommonAnchor (9.0.26043.10001)</package>
+          <package appName="msdynce_AppCommon" version="9.0.26063.10001">msdynce_AppCommonAnchor (9.0.26063.10001)</package>
         </Required>
         <Dependent type="80" schemaName="gap_DEMO" displayName="Grant Life-cycle Utility (GLU) - Beta Service" />
       </MissingDependency>
@@ -1234,7 +1234,7 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="61" schemaName="cc_MscrmControls.AppCommon.AppManagement.ApplicationManagementControl/ApplicationManagementControl.js" displayName="cc_MscrmControls.AppCommon.AppManagement.ApplicationManagementControl/ApplicationManagementControl.js" solution="msdynce_AppCommon (9.0.4.0066)">
-          <package appName="msdynce_AppCommon" version="9.0.26043.10001">msdynce_AppCommonAnchor (9.0.26043.10001)</package>
+          <package appName="msdynce_AppCommon" version="9.0.26063.10001">msdynce_AppCommonAnchor (9.0.26063.10001)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="Application" id="{d4761a72-a2ea-455d-ab23-bc351348e350}" />
       </MissingDependency>
@@ -1271,14 +1271,14 @@
         <Dependent type="62" schemaName="gap_DEMO" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="Microsoft.PowerApps.PowerAppsOneGrid" displayName="Microsoft.PowerApps.PowerAppsOneGrid" solution="BaseCustomControlsCore (9.0.2606.2008)">
-          <package appName="Base Custom Controls" version="9.0.2606.2008">BaseCustomControlsCore (9.0.2606.2008)</package>
+        <Required type="66" schemaName="Microsoft.PowerApps.PowerAppsOneGrid" displayName="Microsoft.PowerApps.PowerAppsOneGrid" solution="BaseCustomControlsCore (9.0.2606.3005)">
+          <package appName="Base Custom Controls" version="9.0.2606.3005">BaseCustomControlsCore (9.0.2606.3005)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="Application" id="{d4761a72-a2ea-455d-ab23-bc351348e350}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="Microsoft.PowerApps.PowerAppsOneGrid" displayName="Microsoft.PowerApps.PowerAppsOneGrid" solution="BaseCustomControlsCore (9.0.2606.2008)">
-          <package appName="Base Custom Controls" version="9.0.2606.2008">BaseCustomControlsCore (9.0.2606.2008)</package>
+        <Required type="66" schemaName="Microsoft.PowerApps.PowerAppsOneGrid" displayName="Microsoft.PowerApps.PowerAppsOneGrid" solution="BaseCustomControlsCore (9.0.2606.3005)">
+          <package appName="Base Custom Controls" version="9.0.2606.3005">BaseCustomControlsCore (9.0.2606.3005)</package>
         </Required>
         <Dependent type="68" id="{0ccc4cd6-c969-4486-b426-bf8b19402e53}" />
       </MissingDependency>
