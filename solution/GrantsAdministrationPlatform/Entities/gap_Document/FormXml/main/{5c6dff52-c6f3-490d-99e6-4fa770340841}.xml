@@ -44,6 +44,14 @@
                       </cell>
                     </row>
                     <row>
+                      <cell id="{2976e2c7-644f-4ac3-baf7-e24ef0e07c83}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Document Category" languagecode="1033" />
+                        </labels>
+                        <control id="gap_documentcategory" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="gap_documentcategory" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
                       <cell locklevel="0" id="{afefc619-0bb7-4828-bebb-d02ff52c4be3}" showlabel="false" rowspan="6" colspan="1" visible="false">
                         <labels>
                           <label description="New Iframe control 1705598745872" languagecode="1033" />

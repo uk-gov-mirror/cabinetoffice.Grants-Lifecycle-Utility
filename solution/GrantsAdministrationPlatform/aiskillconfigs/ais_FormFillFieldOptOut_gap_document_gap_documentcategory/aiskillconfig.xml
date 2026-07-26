@@ -1,0 +1,15 @@
+<aiskillconfig uniquename="ais_FormFillFieldOptOut_gap_document_gap_documentcategory">
+  <aiskill>FormFillFieldOptOut</aiskill>
+  <attribute>
+    <entityid.logicalname>gap_document</entityid.logicalname>
+    <logicalname>gap_documentcategory</logicalname>
+  </attribute>
+  <description>gap_document - Document Category Form fill opt out</description>
+  <entity>
+    <logicalname>gap_document</logicalname>
+  </entity>
+  <iscustomizable>1</iscustomizable>
+  <scope>1</scope>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</aiskillconfig>

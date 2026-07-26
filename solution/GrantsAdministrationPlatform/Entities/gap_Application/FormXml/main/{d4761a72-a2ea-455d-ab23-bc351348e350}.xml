@@ -774,6 +774,34 @@
                   <rows>
                     <row />
                     <row>
+                      <cell id="{ad834efc-1ab4-4287-bbb7-9f52762aa217}" locklevel="0" colspan="1" rowspan="1" visible="false">
+                        <labels>
+                          <label description="Outcome Letter Generation Error" languagecode="1033" />
+                        </labels>
+                        <control id="gap_outcomelettergenerationerror" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="gap_outcomelettergenerationerror" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0baa4a83-c253-45bf-aef4-f4922833f06e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Selected Outcome Letter Template" languagecode="1033" />
+                        </labels>
+                        <control id="gap_outcomelettertemplate" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="gap_outcomelettertemplate" disabled="true">
+                          <parameters>
+                            <DisableViewPicker>true</DisableViewPicker>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7054c015-d11e-4a5d-a737-5013247cf1e7}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Outcome Letter Generated On" languagecode="1033" />
+                        </labels>
+                        <control id="gap_outcomelettergeneratedon" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="gap_outcomelettergeneratedon" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
                       <cell id="{fce7652b-46d4-4663-bfaa-86dfac0d7493}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Notification Letter" languagecode="1033" />

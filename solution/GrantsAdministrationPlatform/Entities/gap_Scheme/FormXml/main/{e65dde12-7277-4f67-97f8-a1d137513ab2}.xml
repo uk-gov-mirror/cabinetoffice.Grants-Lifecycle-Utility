@@ -494,6 +494,56 @@
                     </row>
                   </rows>
                 </section>
+                <section name="tab_9_section_6_outcometemplate" id="0b8841a0-5673-4c9c-9af8-0de4935f7379" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Outcome Letter Template" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell locklevel="0" id="{f28eab35-bd53-4ad0-9a76-3c4b7989bdcb}" colspan="1" rowspan="1" visible="true" showlabel="false">
+                        <labels>
+                          <label description="If these Templates are not populated, the Outcome Letter will not be generated automatically." languagecode="1033" />
+                        </labels>
+                        <control id="gap_outcomeletterqualityreviewriskthreshold" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="gap_outcomeletterqualityreviewriskthreshold" uniqueid="{4b643c1c-f1e4-4818-9b52-b1b050d26dad}" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{04f9d22c-805c-4e8a-9f19-eb9e5da903a1}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Outcome Letter Awarded Template" languagecode="1033" />
+                        </labels>
+                        <control id="gap_outcomeletterawardedtemplate" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="gap_outcomeletterawardedtemplate" disabled="false">
+                          <parameters>
+                            <useMainFormDialogForCreate>true</useMainFormDialogForCreate>
+                            <DefaultViewId>{2BACECF9-C486-F111-8077-000D3AD684D9}</DefaultViewId>
+                            <AvailableViewIds>{3290BD5A-5C80-424B-B500-9366C65BD7AC},{2BACECF9-C486-F111-8077-000D3AD684D9},{9C3627A7-0A2F-F011-8C4D-6045BD0D3FF5},{09008A30-0341-46AC-A323-8708747C63A7},{5CE509E4-028F-4E62-8D9A-17EEBE3FE66F},{29A1436A-C586-F111-8077-000D3AD684D9}</AvailableViewIds>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DisableMru>true</DisableMru>
+                            <useMainFormDialogForEdit>true</useMainFormDialogForEdit>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4872d145-acc9-467f-b6fe-93c145b56b20}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Outcome Letter Refused Template" languagecode="1033" />
+                        </labels>
+                        <control id="gap_outcomeletterrefusedtemplate" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="gap_outcomeletterrefusedtemplate" disabled="false">
+                          <parameters>
+                            <useMainFormDialogForCreate>true</useMainFormDialogForCreate>
+                            <DefaultViewId>{29A1436A-C586-F111-8077-000D3AD684D9}</DefaultViewId>
+                            <AvailableViewIds>{3290BD5A-5C80-424B-B500-9366C65BD7AC},{2BACECF9-C486-F111-8077-000D3AD684D9},{9C3627A7-0A2F-F011-8C4D-6045BD0D3FF5},{09008A30-0341-46AC-A323-8708747C63A7},{5CE509E4-028F-4E62-8D9A-17EEBE3FE66F},{29A1436A-C586-F111-8077-000D3AD684D9}</AvailableViewIds>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DisableMru>true</DisableMru>
+                            <useMainFormDialogForEdit>true</useMainFormDialogForEdit>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
                 <section name="OutcomeAwardProcess" id="45c3e544-dfb8-451a-9e48-9ab170415f45" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
                     <label description="Outcome and Award Process" languagecode="1033" />
@@ -1545,6 +1595,42 @@
             <parameters>
               <primary type="Currency">gap_findapplyapistatus</primary>
               <labelText type="SingleLine.Text" static="true">Admins can manage (delete) FAQ Document entries through elevated permissions via the subgrid below</labelText>
+              <isBold type="TwoOptions" static="true">true</isBold>
+              <isItalic type="TwoOptions" static="true">false</isItalic>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{4b643c1c-f1e4-4818-9b52-b1b050d26dad}">
+          <customControl id="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}">
+            <parameters>
+              <datafieldname>gap_outcomeletterqualityreviewriskthreshold</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl id="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}">
+            <parameters>
+              <datafieldname>gap_outcomeletterqualityreviewriskthreshold</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="pmav_Maverick.Controls.CustomLabel">
+            <parameters>
+              <primary type="Currency">gap_outcomeletterqualityreviewriskthreshold</primary>
+              <labelText type="SingleLine.Text" static="true">If these Templates are not populated, the Outcome Letter will not be generated automatically.</labelText>
+              <isBold type="TwoOptions" static="true">true</isBold>
+              <isItalic type="TwoOptions" static="true">false</isItalic>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="pmav_Maverick.Controls.CustomLabel">
+            <parameters>
+              <primary type="Currency">gap_outcomeletterqualityreviewriskthreshold</primary>
+              <labelText type="SingleLine.Text" static="true">If these Templates are not populated, the Outcome Letter will not be generated automatically.</labelText>
+              <isBold type="TwoOptions" static="true">true</isBold>
+              <isItalic type="TwoOptions" static="true">false</isItalic>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="pmav_Maverick.Controls.CustomLabel">
+            <parameters>
+              <primary type="Currency">gap_outcomeletterqualityreviewriskthreshold</primary>
+              <labelText type="SingleLine.Text" static="true">If these Templates are not populated, the Outcome Letter will not be generated automatically.</labelText>
               <isBold type="TwoOptions" static="true">true</isBold>
               <isItalic type="TwoOptions" static="true">false</isItalic>
             </parameters>

@@ -41,7 +41,8 @@
               "subscriptionRequest/entityname": "gap_application",
               "subscriptionRequest/scope": 4,
               "subscriptionRequest/filteringattributes": "gap_currentstage",
-              "subscriptionRequest/filterexpression": "gap_currentstage eq 'Subjective Scoring Decision' and gap_initializedstage ne 'Subjective Scoring Decision'"
+              "subscriptionRequest/filterexpression": "gap_currentstage eq 'Subjective Scoring Decision' and gap_initializedstage ne 'Subjective Scoring Decision'",
+              "subscriptionRequest/runas": 3
             },
             "authentication": "@parameters('$authentication')"
           }

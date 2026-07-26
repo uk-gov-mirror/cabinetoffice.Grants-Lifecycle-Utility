@@ -1,0 +1,589 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps-1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_90773"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_wordonlinebusiness-1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedwordonlinebusiness_d566a"
+        },
+        "api": {
+          "name": "shared_wordonlinebusiness"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "a5012d03-5406-407b-ad84-47c621153590"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps-1",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "gap_application",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "gap_outcomelettergeneratedon",
+              "subscriptionRequest/filterexpression": "gap_outcomelettergeneratedon ne null"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Initialize_variable": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "1d3cb58a-86ce-40d1-9ed0-c599d69bd2ff"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "NewLine",
+                "type": "string",
+                "value": "\n"
+              }
+            ]
+          }
+        },
+        "Initialize_variable_4": {
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "09fb9435-4052-4954-b764-983963c8e174"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "ResponsesExtracts",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Error_Handling": {
+          "actions": {
+            "Create_Error_Note": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "15c1da55-291f-4b69-964b-250772455840"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps-1",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "annotations",
+                  "item/subject": "FAIL: Generating GFA",
+                  "item/notetext": "Generating a GFA has failed. Please check the Scheme has a GFA Template configuration assigned, and application contains responses. Else, contact an administrator.",
+                  "item/objectid_gap_application@odata.bind": "gap_applications(@{triggerOutputs()?['body/gap_applicationid']})"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Scope": [
+              "Failed",
+              "Skipped",
+              "TimedOut"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "31e265ed-01af-47a3-a361-bb4bf7e442fd"
+          },
+          "type": "Scope"
+        },
+        "Scope": {
+          "actions": {
+            "Data_Init": {
+              "actions": {
+                "Get_Applicant_Information": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "77cea032-464c-4d17-838a-ac071703e0e0"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps-1",
+                      "operationId": "GetItem",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "contacts",
+                      "recordId": "@triggerOutputs()?['body/_gap_applicant_value']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Get_Organization": {
+                  "runAfter": {
+                    "Get_Applicant_Information": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "6481a3b6-6c1f-40c2-be8a-39af1dff1a30"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps-1",
+                      "operationId": "GetItem",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "accounts",
+                      "recordId": "@triggerOutputs()?['body/_gap_organization_value']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Get_Scheme": {
+                  "runAfter": {
+                    "Get_Organization": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "e63f7a3e-33a1-4ec5-a98b-422ed2455825"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps-1",
+                      "operationId": "GetItem",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "gap_schemes",
+                      "recordId": "@triggerOutputs()?['body/_gap_scheme_value']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Get_GFA_Config": {
+                  "runAfter": {
+                    "Get_Scheme": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "47401656-7007-4dd3-b725-78e57d664592"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps-1",
+                      "operationId": "GetItem",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "gap_gfaschemetemplates",
+                      "recordId": "@outputs('Get_Scheme')?['body/_gap_gfatemplateconfiguration_value']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "ff06b919-edc3-4fa0-801a-cd7178918a9b"
+              },
+              "type": "Scope"
+            },
+            "Retrieve_required_data": {
+              "actions": {
+                "Get_Applicant_Responses": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "835fee20-e6c3-4707-bde3-6bd07bc241f7"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps-1",
+                      "operationId": "PerformBoundAction",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "gap_applications",
+                      "actionName": "Microsoft.Dynamics.CRM.gap_ReformatApplicantResponses",
+                      "recordId": "@triggerOutputs()?['body/gap_applicationid']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Extract_Question_Data": {
+                  "actions": {
+                    "Lead_Contact": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "da790b0b-a07d-49e8-8e7f-eeefc15023f7"
+                      },
+                      "type": "Query",
+                      "inputs": {
+                        "from": "@outputs('Applicant_Responses_Object')",
+                        "where": "@equals(item()?['Question'], 'Accountable Officer (Name and Job Title)')"
+                      }
+                    },
+                    "Lead_Contact_2": {
+                      "runAfter": {
+                        "Lead_Contact": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "1ec5bb60-b2d7-41d4-8410-eabf90e3ac97"
+                      },
+                      "type": "Query",
+                      "inputs": {
+                        "from": "@outputs('Applicant_Responses_Object')",
+                        "where": "@equals(item()?['Question'], 'Accountable Officer (Name and Job Title)')"
+                      }
+                    },
+                    "Lead_Contact_3": {
+                      "runAfter": {
+                        "Lead_Contact_2": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "745b1cc4-3827-4be5-be29-f380cad92dd5"
+                      },
+                      "type": "Query",
+                      "inputs": {
+                        "from": "@outputs('Applicant_Responses_Object')",
+                        "where": "@equals(item()?['Question'], 'Accountable Officer Contact phone number')"
+                      }
+                    },
+                    "Lead_Contact_4": {
+                      "runAfter": {
+                        "Lead_Contact_3": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "745b1cc4-3827-4be5-be29-f380cad92dd5"
+                      },
+                      "type": "Query",
+                      "inputs": {
+                        "from": "@outputs('Applicant_Responses_Object')",
+                        "where": "@equals(item()?['Question'], 'Head Office Postal Address')"
+                      }
+                    },
+                    "Project_Name": {
+                      "runAfter": {
+                        "Lead_Contact_4": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "745b1cc4-3827-4be5-be29-f380cad92dd5"
+                      },
+                      "type": "Query",
+                      "inputs": {
+                        "from": "@outputs('Applicant_Responses_Object')",
+                        "where": "@equals(item()?['Question'], 'Project Title')"
+                      }
+                    },
+                    "Append_to_Extract": {
+                      "runAfter": {
+                        "Project_Name": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "6656c738-3222-49ba-8b2e-596588bf3c4f"
+                      },
+                      "type": "AppendToArrayVariable",
+                      "inputs": {
+                        "name": "ResponsesExtracts",
+                        "value": "@if(empty(body('Lead_Contact')),'Not-Found',body('Lead_Contact')?[0]?['Answer'])"
+                      }
+                    },
+                    "Append_to_Extract_2": {
+                      "runAfter": {
+                        "Append_to_Extract": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "d63d8fa7-97e5-4b2a-bd21-3ce5acd18927"
+                      },
+                      "type": "AppendToArrayVariable",
+                      "inputs": {
+                        "name": "ResponsesExtracts",
+                        "value": "@if(empty(body('Lead_Contact_2')),'Not-Found',body('Lead_Contact_2')?[0]?['Answer'])"
+                      }
+                    },
+                    "Append_to_Extract_3": {
+                      "runAfter": {
+                        "Append_to_Extract_2": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "afd6bb0d-b980-4a49-abe8-499f913ff8a2"
+                      },
+                      "type": "AppendToArrayVariable",
+                      "inputs": {
+                        "name": "ResponsesExtracts",
+                        "value": "@if(empty(body('Lead_Contact_3')),'Not-Found',body('Lead_Contact_3')?[0]?['Answer'])"
+                      }
+                    },
+                    "Append_to_Extract_5": {
+                      "runAfter": {
+                        "Append_to_Extract_4": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "bf0f81ef-2b0a-4105-b4f3-4cb60e40f032"
+                      },
+                      "type": "AppendToArrayVariable",
+                      "inputs": {
+                        "name": "ResponsesExtracts",
+                        "value": "@if(empty(body('Project_Name')),'Not-Found',body('Project_Name')?[0]?['Answer'])"
+                      }
+                    },
+                    "Append_to_Extract_4": {
+                      "runAfter": {
+                        "Append_to_Extract_3": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "bf0f81ef-2b0a-4105-b4f3-4cb60e40f032"
+                      },
+                      "type": "AppendToArrayVariable",
+                      "inputs": {
+                        "name": "ResponsesExtracts",
+                        "value": "@if(empty(body('Lead_Contact_4')),'Not-Found',body('Lead_Contact_4')?[0]?['Answer'])"
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Applicant_Responses_Object": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "ea6bfeb9-ebf4-4aef-a322-8a6ee51b4af9"
+                  },
+                  "type": "Scope"
+                },
+                "Applicant_Responses_Object": {
+                  "runAfter": {
+                    "Get_Applicant_Responses": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "2f18b28e-f491-4a94-beee-18dd30e49fe9"
+                  },
+                  "type": "Compose",
+                  "inputs": "@json(outputs('Get_Applicant_Responses')?['body/ProcessResult'])"
+                },
+                "Get_Outcome_Template": {
+                  "runAfter": {
+                    "Extract_Question_Data": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "0f16b9bf-e533-493a-a957-0fed9d99c2d6"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps-1",
+                      "operationId": "GetItem",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "gap_documents",
+                      "recordId": "@triggerOutputs()?['body/_gap_outcomelettertemplate_value']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {
+                "Data_Init": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "0941758d-370b-4ad7-a742-a4ca21b4fe4b"
+              },
+              "type": "Scope"
+            },
+            "Switch": {
+              "runAfter": {
+                "Retrieve_required_data": [
+                  "Succeeded"
+                ]
+              },
+              "cases": {
+                "Short_Form_(Discontinued)": {
+                  "case": "Short",
+                  "actions": {
+                    "Add_a_new_row": {
+                      "runAfter": {
+                        "Populate_a_Microsoft_Word_template": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "5cafff4d-8e55-4b02-83fd-0ff5187c17c3"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps-1",
+                          "operationId": "CreateRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "gap_documents",
+                          "item/gap_title": "Populated Outcome Letter for @{outputs('Get_Applicant_Information')?['body/fullname']}-@{outputs('Get_Scheme')?['body/gap_title']}",
+                          "item/cr982_Application@odata.bind": "applications(@{triggerOutputs()?['body/gap_applicationid']})",
+                          "item/gap_documentcategory": 3
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Upload_a_file_or_an_image_2": {
+                      "runAfter": {
+                        "Add_a_new_row": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "a0daaf52-af0a-4e8b-8b38-8f6e437ca785"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps-1",
+                          "operationId": "UpdateEntityFileImageFieldContent",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "gap_documents",
+                          "recordId": "@outputs('Add_a_new_row')?['body/gap_documentid']",
+                          "fileImageFieldName": "gap_documentupload",
+                          "item": "@body('Populate_a_Microsoft_Word_template')",
+                          "x-ms-file-name": "@{utcNow()} Populated Template for @{outputs('Get_Applicant_Information')?['body/fullname']}.docx"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Populate_a_Microsoft_Word_template": {
+                      "runAfter": {
+                        "Create_a_Microsoft_Word_document_with_the_given_content": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "d2be7a66-b8d9-462e-92be-f4a3062dbc55"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_wordonlinebusiness-1",
+                          "operationId": "CreateFileItem",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness"
+                        },
+                        "parameters": {
+                          "source": "sites/govgrantsmanagedservice.sharepoint.com,29757e3c-0cfc-4c60-b277-fcb5e5e94b29,1d826b85-0d75-44ea-896b-39edbb93270d",
+                          "drive": "b!PH51KfwMYEyyd_y15elLKYVrgh11DepEiWs57buTJw0cw2z_KSFRTqE3tdHpFWGP",
+                          "file": "@body('Create_a_Microsoft_Word_document_with_the_given_content')"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Create_a_Microsoft_Word_document_with_the_given_content": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "b3bffdd6-3b72-472e-9bbd-8440a91da6ab"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_wordonlinebusiness-1",
+                          "operationId": "CreateWordFileWithContent",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness"
+                        },
+                        "parameters": {
+                          "content/content": "@outputs('Get_Outcome_Template')?['body/gap_filecontent']",
+                          "fileName": "TemporaryTemplate"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    }
+                  }
+                }
+              },
+              "default": {
+                "actions": {}
+              },
+              "expression": "@'Short'",
+              "metadata": {
+                "operationMetadataId": "646f1079-7bc7-4032-a795-070081b9aef3"
+              },
+              "type": "Switch"
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_4": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "43708424-4064-45e4-be75-f567986b5dd8"
+          },
+          "type": "Scope"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}
