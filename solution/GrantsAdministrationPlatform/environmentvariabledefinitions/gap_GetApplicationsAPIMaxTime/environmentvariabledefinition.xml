@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="gap_GetApplicationsAPIMaxTime">
+  <defaultvalue>PT5H</defaultvalue>
+  <description default="This value is used to set the max time that the Get Application loops can take in the  API | Sync Responses v3 flow. In ISO format e.g. PT5H for 5 hours.">
+    <label description="This value is used to set the max time that the Get Application loops can take in the  API | Sync Responses v3 flow. In ISO format e.g. PT5H for 5 hours." languagecode="1033" />
+  </description>
+  <displayname default="GetApplicationsAPIMaxTime">
+    <label description="GetApplicationsAPIMaxTime" languagecode="1033" />
+  </displayname>
+  <introducedversion>7.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

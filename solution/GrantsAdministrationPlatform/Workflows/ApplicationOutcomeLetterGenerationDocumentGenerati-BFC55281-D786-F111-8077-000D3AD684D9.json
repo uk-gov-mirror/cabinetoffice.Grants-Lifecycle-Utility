@@ -10,13 +10,31 @@
           "name": "shared_commondataserviceforapps"
         }
       },
-      "shared_wordonlinebusiness-1": {
+      "shared_googledrive": {
         "runtimeSource": "embedded",
         "connection": {
-          "connectionReferenceLogicalName": "new_sharedwordonlinebusiness_d566a"
+          "connectionReferenceLogicalName": "gap_sharedgoogledrive_280ac"
+        },
+        "api": {
+          "name": "shared_googledrive"
+        }
+      },
+      "shared_wordonlinebusiness": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "gap_WordOnline"
         },
         "api": {
           "name": "shared_wordonlinebusiness"
+        }
+      },
+      "shared_sharepointonline": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "gap_SharePoint"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
         }
       }
     },
@@ -31,6 +49,39 @@
         "$authentication": {
           "defaultValue": {},
           "type": "SecureObject"
+        },
+        "OwningOrganisationName (gap_OwningOrganisationName)": {
+          "defaultValue": "Government Grants Managed Service",
+          "type": "String",
+          "metadata": {
+            "schemaName": "gap_OwningOrganisationName",
+            "description": "e.g. GGMS"
+          }
+        },
+        "OutcomeLetterDaysToReply (gap_OutcomeLetterDaysToReply)": {
+          "defaultValue": 2,
+          "type": "Int",
+          "metadata": {
+            "schemaName": "gap_OutcomeLetterDaysToReply",
+            "description": "This value represents the number of days that an outcome letter should be responded to in. It affects a value within the Generated Outcome Letter Templates. This should be a whole number of days, which will be added to the current date to indicate a deadline for the Outcome letter response."
+          }
+        },
+        "BankHolidays (gap_BankHolidays)": {
+          "defaultValue": [
+            "2026-01-01",
+            "2026-04-03",
+            "2026-04-06",
+            "2026-05-04",
+            "2026-05-25",
+            "2026-08-31",
+            "2026-12-25",
+            "2026-12-28"
+          ],
+          "type": "Object",
+          "metadata": {
+            "schemaName": "gap_BankHolidays",
+            "description": "Used in the calculation of an Outcome letter respond by date that takes into account working days and Bank holidays"
+          }
         }
       },
       "triggers": {
@@ -57,7 +108,7 @@
         }
       },
       "actions": {
-        "Initialize_variable": {
+        "Initialize_NewLine": {
           "runAfter": {},
           "metadata": {
             "operationMetadataId": "1d3cb58a-86ce-40d1-9ed0-c599d69bd2ff"
@@ -73,9 +124,9 @@
             ]
           }
         },
-        "Initialize_variable_4": {
+        "Initialize_ResponsesExtracts": {
           "runAfter": {
-            "Initialize_variable": [
+            "Initialize_NewLine": [
               "Succeeded"
             ]
           },
@@ -108,9 +159,33 @@
                 },
                 "parameters": {
                   "entityName": "annotations",
-                  "item/subject": "FAIL: Generating GFA",
-                  "item/notetext": "Generating a GFA has failed. Please check the Scheme has a GFA Template configuration assigned, and application contains responses. Else, contact an administrator.",
+                  "item/subject": "FAIL: Generating Outcome Letter",
+                  "item/notetext": "@variables('ErrorMsg')",
                   "item/objectid_gap_application@odata.bind": "gap_applications(@{triggerOutputs()?['body/gap_applicationid']})"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Update_Application_with_Outcome_Letter_error": {
+              "runAfter": {
+                "Create_Error_Note": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "886aa659-c4d1-4bdf-9e54-d21f9c08b083"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps-1",
+                  "operationId": "UpdateOnlyRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "gap_applications",
+                  "recordId": "@triggerOutputs()?['body/gap_applicationid']",
+                  "item/gap_outcomelettergenerationerror": "Outcome letter generation failed, please check template exists on scheme and try again."
                 },
                 "authentication": "@parameters('$authentication')"
               }
@@ -197,232 +272,9 @@
                     "authentication": "@parameters('$authentication')"
                   }
                 },
-                "Get_GFA_Config": {
-                  "runAfter": {
-                    "Get_Scheme": [
-                      "Succeeded"
-                    ]
-                  },
-                  "metadata": {
-                    "operationMetadataId": "47401656-7007-4dd3-b725-78e57d664592"
-                  },
-                  "type": "OpenApiConnection",
-                  "inputs": {
-                    "host": {
-                      "connectionName": "shared_commondataserviceforapps-1",
-                      "operationId": "GetItem",
-                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                    },
-                    "parameters": {
-                      "entityName": "gap_gfaschemetemplates",
-                      "recordId": "@outputs('Get_Scheme')?['body/_gap_gfatemplateconfiguration_value']"
-                    },
-                    "authentication": "@parameters('$authentication')"
-                  }
-                }
-              },
-              "runAfter": {},
-              "metadata": {
-                "operationMetadataId": "ff06b919-edc3-4fa0-801a-cd7178918a9b"
-              },
-              "type": "Scope"
-            },
-            "Retrieve_required_data": {
-              "actions": {
-                "Get_Applicant_Responses": {
-                  "runAfter": {},
-                  "metadata": {
-                    "operationMetadataId": "835fee20-e6c3-4707-bde3-6bd07bc241f7"
-                  },
-                  "type": "OpenApiConnection",
-                  "inputs": {
-                    "host": {
-                      "connectionName": "shared_commondataserviceforapps-1",
-                      "operationId": "PerformBoundAction",
-                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                    },
-                    "parameters": {
-                      "entityName": "gap_applications",
-                      "actionName": "Microsoft.Dynamics.CRM.gap_ReformatApplicantResponses",
-                      "recordId": "@triggerOutputs()?['body/gap_applicationid']"
-                    },
-                    "authentication": "@parameters('$authentication')"
-                  }
-                },
-                "Extract_Question_Data": {
-                  "actions": {
-                    "Lead_Contact": {
-                      "runAfter": {},
-                      "metadata": {
-                        "operationMetadataId": "da790b0b-a07d-49e8-8e7f-eeefc15023f7"
-                      },
-                      "type": "Query",
-                      "inputs": {
-                        "from": "@outputs('Applicant_Responses_Object')",
-                        "where": "@equals(item()?['Question'], 'Accountable Officer (Name and Job Title)')"
-                      }
-                    },
-                    "Lead_Contact_2": {
-                      "runAfter": {
-                        "Lead_Contact": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "1ec5bb60-b2d7-41d4-8410-eabf90e3ac97"
-                      },
-                      "type": "Query",
-                      "inputs": {
-                        "from": "@outputs('Applicant_Responses_Object')",
-                        "where": "@equals(item()?['Question'], 'Accountable Officer (Name and Job Title)')"
-                      }
-                    },
-                    "Lead_Contact_3": {
-                      "runAfter": {
-                        "Lead_Contact_2": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "745b1cc4-3827-4be5-be29-f380cad92dd5"
-                      },
-                      "type": "Query",
-                      "inputs": {
-                        "from": "@outputs('Applicant_Responses_Object')",
-                        "where": "@equals(item()?['Question'], 'Accountable Officer Contact phone number')"
-                      }
-                    },
-                    "Lead_Contact_4": {
-                      "runAfter": {
-                        "Lead_Contact_3": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "745b1cc4-3827-4be5-be29-f380cad92dd5"
-                      },
-                      "type": "Query",
-                      "inputs": {
-                        "from": "@outputs('Applicant_Responses_Object')",
-                        "where": "@equals(item()?['Question'], 'Head Office Postal Address')"
-                      }
-                    },
-                    "Project_Name": {
-                      "runAfter": {
-                        "Lead_Contact_4": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "745b1cc4-3827-4be5-be29-f380cad92dd5"
-                      },
-                      "type": "Query",
-                      "inputs": {
-                        "from": "@outputs('Applicant_Responses_Object')",
-                        "where": "@equals(item()?['Question'], 'Project Title')"
-                      }
-                    },
-                    "Append_to_Extract": {
-                      "runAfter": {
-                        "Project_Name": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "6656c738-3222-49ba-8b2e-596588bf3c4f"
-                      },
-                      "type": "AppendToArrayVariable",
-                      "inputs": {
-                        "name": "ResponsesExtracts",
-                        "value": "@if(empty(body('Lead_Contact')),'Not-Found',body('Lead_Contact')?[0]?['Answer'])"
-                      }
-                    },
-                    "Append_to_Extract_2": {
-                      "runAfter": {
-                        "Append_to_Extract": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "d63d8fa7-97e5-4b2a-bd21-3ce5acd18927"
-                      },
-                      "type": "AppendToArrayVariable",
-                      "inputs": {
-                        "name": "ResponsesExtracts",
-                        "value": "@if(empty(body('Lead_Contact_2')),'Not-Found',body('Lead_Contact_2')?[0]?['Answer'])"
-                      }
-                    },
-                    "Append_to_Extract_3": {
-                      "runAfter": {
-                        "Append_to_Extract_2": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "afd6bb0d-b980-4a49-abe8-499f913ff8a2"
-                      },
-                      "type": "AppendToArrayVariable",
-                      "inputs": {
-                        "name": "ResponsesExtracts",
-                        "value": "@if(empty(body('Lead_Contact_3')),'Not-Found',body('Lead_Contact_3')?[0]?['Answer'])"
-                      }
-                    },
-                    "Append_to_Extract_5": {
-                      "runAfter": {
-                        "Append_to_Extract_4": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "bf0f81ef-2b0a-4105-b4f3-4cb60e40f032"
-                      },
-                      "type": "AppendToArrayVariable",
-                      "inputs": {
-                        "name": "ResponsesExtracts",
-                        "value": "@if(empty(body('Project_Name')),'Not-Found',body('Project_Name')?[0]?['Answer'])"
-                      }
-                    },
-                    "Append_to_Extract_4": {
-                      "runAfter": {
-                        "Append_to_Extract_3": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "bf0f81ef-2b0a-4105-b4f3-4cb60e40f032"
-                      },
-                      "type": "AppendToArrayVariable",
-                      "inputs": {
-                        "name": "ResponsesExtracts",
-                        "value": "@if(empty(body('Lead_Contact_4')),'Not-Found',body('Lead_Contact_4')?[0]?['Answer'])"
-                      }
-                    }
-                  },
-                  "runAfter": {
-                    "Applicant_Responses_Object": [
-                      "Succeeded"
-                    ]
-                  },
-                  "metadata": {
-                    "operationMetadataId": "ea6bfeb9-ebf4-4aef-a322-8a6ee51b4af9"
-                  },
-                  "type": "Scope"
-                },
-                "Applicant_Responses_Object": {
-                  "runAfter": {
-                    "Get_Applicant_Responses": [
-                      "Succeeded"
-                    ]
-                  },
-                  "metadata": {
-                    "operationMetadataId": "2f18b28e-f491-4a94-beee-18dd30e49fe9"
-                  },
-                  "type": "Compose",
-                  "inputs": "@json(outputs('Get_Applicant_Responses')?['body/ProcessResult'])"
-                },
                 "Get_Outcome_Template": {
                   "runAfter": {
-                    "Extract_Question_Data": [
+                    "Get_Scheme": [
                       "Succeeded"
                     ]
                   },
@@ -442,29 +294,202 @@
                     },
                     "authentication": "@parameters('$authentication')"
                   }
+                },
+                "Get_file_content_using_id": {
+                  "runAfter": {
+                    "Catch_null_File_ID": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "5f711d67-b51a-44f8-9f23-bb973c65c921"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_googledrive",
+                      "operationId": "GetFileContent",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_googledrive"
+                    },
+                    "parameters": {
+                      "id": "@outputs('Get_Outcome_Template')?['body/gap_fileid']",
+                      "inferContentType": true
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Catch_null_File_ID": {
+                  "actions": {
+                    "Set_variable": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "7a7c77c4-9453-417b-89e0-11653a3be6e4"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "ErrorMsg",
+                        "value": "Google Drive File not found - please wait for sync of document template to document storage - this can take up to 30 minutes."
+                      }
+                    },
+                    "Create_Error_Note_2": {
+                      "runAfter": {
+                        "Update_Application_with_Outcome_Letter_error_2": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "15c1da55-291f-4b69-964b-250772455840"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps-1",
+                          "operationId": "CreateRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "annotations",
+                          "item/subject": "FAIL: Generating Outcome Letter",
+                          "item/notetext": "@variables('ErrorMsg')",
+                          "item/objectid_gap_application@odata.bind": "gap_applications(@{triggerOutputs()?['body/gap_applicationid']})"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Terminate": {
+                      "runAfter": {
+                        "Create_Error_Note_2": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "d3a3c037-c3d8-4090-82a0-df9f2e57405b"
+                      },
+                      "type": "Terminate",
+                      "inputs": {
+                        "runStatus": "Failed",
+                        "runError": {
+                          "code": "404",
+                          "message": "@variables('ErrorMsg')"
+                        }
+                      }
+                    },
+                    "Update_Application_with_Outcome_Letter_error_2": {
+                      "runAfter": {
+                        "Set_variable": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "886aa659-c4d1-4bdf-9e54-d21f9c08b083"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps-1",
+                          "operationId": "UpdateOnlyRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "gap_applications",
+                          "recordId": "@triggerOutputs()?['body/gap_applicationid']",
+                          "item/gap_outcomelettergenerationerror": "@variables('ErrorMsg')"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Compose_-_Reply_Date": [
+                      "Succeeded"
+                    ]
+                  },
+                  "expression": {
+                    "equals": [
+                      "@outputs('Get_Outcome_Template')?['body/gap_fileid']",
+                      "@null"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "bcfc27b8-20bf-4fae-991e-04a004e05d4b"
+                  },
+                  "type": "If"
+                },
+                "Compose_-_Candidate_Day_Offsets": {
+                  "runAfter": {
+                    "Get_Outcome_Template": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "a0428582-27b0-49e5-9d79-769f82683d8b"
+                  },
+                  "type": "Compose",
+                  "inputs": "@range(\r\n    1,\r\n    add(\r\n        mul(\r\n            int(parameters('OutcomeLetterDaysToReply (gap_OutcomeLetterDaysToReply)')),\r\n            2\r\n        ),\r\n        10\r\n    )\r\n)"
+                },
+                "Select_-_Build_Candidate_Dates": {
+                  "runAfter": {
+                    "Compose_-_Candidate_Day_Offsets": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "42de0868-1d44-4b5f-9b33-98b20a03279d"
+                  },
+                  "type": "Select",
+                  "inputs": {
+                    "from": "@outputs('Compose_-_Candidate_Day_Offsets')",
+                    "select": {
+                      "Date": "@formatDateTime(\r\n    addDays(\r\n        triggerOutputs()?['body/gap_outcomelettergeneratedon'],\r\n        item()\r\n    ),\r\n    'yyyy-MM-dd'\r\n)",
+                      "WorkingDay": "@if(\r\n    and(\r\n        greaterOrEquals(\r\n            dayOfWeek(\r\n                addDays(\r\n                    triggerOutputs()?['body/gap_outcomelettergeneratedon'],\r\n                    item()\r\n                )\r\n            ),\r\n            1\r\n        ),\r\n        lessOrEquals(\r\n            dayOfWeek(\r\n                addDays(\r\n                    triggerOutputs()?['body/gap_outcomelettergeneratedon'],\r\n                    item()\r\n                )\r\n            ),\r\n            5\r\n        ),\r\n        not(\r\n            contains(\r\n                variables('BankHolidays'),\r\n                formatDateTime(\r\n                    addDays(\r\n                        triggerOutputs()?['body/gap_outcomelettergeneratedon'],\r\n                        item()\r\n                    ),\r\n                    'yyyy-MM-dd'\r\n                )\r\n            )\r\n        )\r\n    ),\r\n    1,\r\n    0\r\n)"
+                    }
+                  }
+                },
+                "Filter_array_-_Working_Days_Only": {
+                  "runAfter": {
+                    "Select_-_Build_Candidate_Dates": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "7ee486c8-1cb9-4731-b326-3d6bb5bc1009"
+                  },
+                  "type": "Query",
+                  "inputs": {
+                    "from": "@body('Select_-_Build_Candidate_Dates')",
+                    "where": "@equals(item()?['WorkingDay'], 1)"
+                  }
+                },
+                "Compose_-_Reply_Date": {
+                  "runAfter": {
+                    "Filter_array_-_Working_Days_Only": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "0b67d5b8-361c-4982-aece-97de475a5dd3"
+                  },
+                  "type": "Compose",
+                  "inputs": "@body('Filter_array_-_Working_Days_Only')[\r\n    sub(\r\n        int(parameters('OutcomeLetterDaysToReply (gap_OutcomeLetterDaysToReply)')),\r\n        1\r\n    )\r\n]?['Date']"
                 }
               },
-              "runAfter": {
-                "Data_Init": [
-                  "Succeeded"
-                ]
-              },
+              "runAfter": {},
               "metadata": {
-                "operationMetadataId": "0941758d-370b-4ad7-a742-a4ca21b4fe4b"
+                "operationMetadataId": "ff06b919-edc3-4fa0-801a-cd7178918a9b"
               },
               "type": "Scope"
             },
             "Switch": {
               "runAfter": {
-                "Retrieve_required_data": [
+                "Condition": [
                   "Succeeded"
                 ]
               },
               "cases": {
-                "Short_Form_(Discontinued)": {
+                "Short_Form": {
                   "case": "Short",
                   "actions": {
-                    "Add_a_new_row": {
+                    "Add_a_new_row_to_Documents_table": {
                       "runAfter": {
                         "Populate_a_Microsoft_Word_template": [
                           "Succeeded"
@@ -489,9 +514,9 @@
                         "authentication": "@parameters('$authentication')"
                       }
                     },
-                    "Upload_a_file_or_an_image_2": {
+                    "Upload_file_contents_to_document_table": {
                       "runAfter": {
-                        "Add_a_new_row": [
+                        "Add_a_new_row_to_Documents_table": [
                           "Succeeded"
                         ]
                       },
@@ -507,7 +532,7 @@
                         },
                         "parameters": {
                           "entityName": "gap_documents",
-                          "recordId": "@outputs('Add_a_new_row')?['body/gap_documentid']",
+                          "recordId": "@outputs('Add_a_new_row_to_Documents_table')?['body/gap_documentid']",
                           "fileImageFieldName": "gap_documentupload",
                           "item": "@body('Populate_a_Microsoft_Word_template')",
                           "x-ms-file-name": "@{utcNow()} Populated Template for @{outputs('Get_Applicant_Information')?['body/fullname']}.docx"
@@ -517,7 +542,7 @@
                     },
                     "Populate_a_Microsoft_Word_template": {
                       "runAfter": {
-                        "Create_a_Microsoft_Word_document_with_the_given_content": [
+                        "Create_file_2": [
                           "Succeeded"
                         ]
                       },
@@ -527,35 +552,151 @@
                       "type": "OpenApiConnection",
                       "inputs": {
                         "host": {
-                          "connectionName": "shared_wordonlinebusiness-1",
+                          "connectionName": "shared_wordonlinebusiness",
                           "operationId": "CreateFileItem",
                           "apiId": "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness"
                         },
                         "parameters": {
                           "source": "sites/govgrantsmanagedservice.sharepoint.com,29757e3c-0cfc-4c60-b277-fcb5e5e94b29,1d826b85-0d75-44ea-896b-39edbb93270d",
                           "drive": "b!PH51KfwMYEyyd_y15elLKYVrgh11DepEiWs57buTJw0cw2z_KSFRTqE3tdHpFWGP",
-                          "file": "@body('Create_a_Microsoft_Word_document_with_the_given_content')"
+                          "file": "/GLU - Document Library (DEV)/Templates/@{outputs('Create_file')?['body/Name']}",
+                          "dynamicFileSchema": {
+                            "275292372": "@{outputs('Get_Applicant_Information')?['body/address1_city']}",
+                            "415671089": "@{outputs('Get_Organization')?['body/address1_city']}",
+                            "646939243": "@{outputs('Get_Applicant_Information')?['body/fullname']}",
+                            "898868864": "@{outputs('Get_Applicant_Information')?['body/address1_postalcode']}",
+                            "1496999327": "£@{triggerOutputs()?['body/gap_amountallocated']}",
+                            "1525288439": "@{outputs('Get_Applicant_Information')?['body/address1_line1']}",
+                            "1765418939": "@{outputs('Get_Applicant_Information')?['body/fullname']}",
+                            "1773126097": "@{parameters('OwningOrganisationName (gap_OwningOrganisationName)')}",
+                            "1853066596": "@{outputs('Get_Scheme')?['body/gap_title']}",
+                            "1935550701": "@{outputs('Get_Scheme')?['body/gap_title']}",
+                            "-222987038": "@{outputs('Get_Organization')?['body/name']}",
+                            "-29799878": "@{outputs('Get_Organization')?['body/address1_name']}",
+                            "-222602358": "@{outputs('Get_Organization')?['body/address1_line1']}",
+                            "-689291122": "@{outputs('Get_Organization')?['body/address1_postalcode']}",
+                            "-1059860716": "@{outputs('Get_Applicant_Information')?['body/adx_organizationname']}",
+                            "-359505603": "@{outputs('Get_Applicant_Information')?['body/address1_line2']}",
+                            "-2070101600": "@{if(empty(triggerOutputs()?['body/gap_outcomelettergeneratedon']), '', formatDateTime(triggerOutputs()?['body/gap_outcomelettergeneratedon'], 'dd/MM/yyyy'))}",
+                            "-935289989": "@{outputs('Get_Applicant_Information')?['body/address1_name']}",
+                            "-896362602": "@{triggerOutputs()?['body/gap_gapid']}",
+                            "-1085062831": "@{if(empty(triggerOutputs()?['body/gap_outcomelettergeneratedon']), '', formatDateTime(triggerOutputs()?['body/gap_outcomelettergeneratedon'], 'dd/MM/yyyy'))}",
+                            "-1003046543": "£@{triggerOutputs()?['body/gap_amountallocated']}",
+                            "-1671473762": "@{if(\r\n    empty(triggerOutputs()?['body/gap_outcomelettergeneratedon']),\r\n    '',\r\n    formatDateTime(\r\n        outputs('Compose_-_Reply_Date'),\r\n        'dd/MM/yyyy'\r\n    )\r\n)}",
+                            "-154225863": "@{outputs('Get_Organization')?['body/name']}"
+                          }
                         },
                         "authentication": "@parameters('$authentication')"
                       }
                     },
-                    "Create_a_Microsoft_Word_document_with_the_given_content": {
-                      "runAfter": {},
+                    "Update_Application_with_Notification_Letter": {
+                      "runAfter": {
+                        "Upload_file_contents_to_document_table": [
+                          "Succeeded"
+                        ]
+                      },
                       "metadata": {
-                        "operationMetadataId": "b3bffdd6-3b72-472e-9bbd-8440a91da6ab"
+                        "operationMetadataId": "886aa659-c4d1-4bdf-9e54-d21f9c08b083"
                       },
                       "type": "OpenApiConnection",
                       "inputs": {
                         "host": {
-                          "connectionName": "shared_wordonlinebusiness-1",
-                          "operationId": "CreateWordFileWithContent",
+                          "connectionName": "shared_commondataserviceforapps-1",
+                          "operationId": "UpdateOnlyRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "gap_applications",
+                          "recordId": "@triggerOutputs()?['body/gap_applicationid']",
+                          "item/gap_NotificationLetter@odata.bind": "gap_documents(@{outputs('Add_a_new_row_to_Documents_table')?['body/gap_documentid']})",
+                          "item/gap_outcomelettergenerationerror": "Generation Complete at @{utcNow()} UTC"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Populate_a_Microsoft_Word_template_2": {
+                      "runAfter": {},
+                      "metadata": {
+                        "01G5KF32Z3L2DFFHWYFZFL532FDI4CERDS": "/GLU - Document Library (DEV)/Templates/Pipe in Google drive - Outcome Letter Tempate Test v2 - Refused.docx",
+                        "operationMetadataId": "5610fea0-2ba9-4b0b-8c20-093a84bb36ff"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_wordonlinebusiness",
+                          "operationId": "CreateFileItem",
                           "apiId": "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness"
                         },
                         "parameters": {
-                          "content/content": "@outputs('Get_Outcome_Template')?['body/gap_filecontent']",
-                          "fileName": "TemporaryTemplate"
+                          "source": "sites/govgrantsmanagedservice.sharepoint.com,29757e3c-0cfc-4c60-b277-fcb5e5e94b29,1d826b85-0d75-44ea-896b-39edbb93270d",
+                          "drive": "b!PH51KfwMYEyyd_y15elLKYVrgh11DepEiWs57buTJw0cw2z_KSFRTqE3tdHpFWGP",
+                          "file": "01G5KF32Z3L2DFFHWYFZFL532FDI4CERDS",
+                          "dynamicFileSchema/1010719369": "@outputs('Get_Scheme')?['body/gap_title']",
+                          "dynamicFileSchema/1431471770": "@outputs('Get_Applicant_Information')?['body/fullname']",
+                          "dynamicFileSchema/-918177614": "@outputs('Get_Applicant_Information')?['body/fullname']",
+                          "dynamicFileSchema/-2013831918": "@outputs('Get_Applicant_Information')?['body/adx_organizationname']"
                         },
                         "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Create_file": {
+                      "runAfter": {
+                        "Populate_a_Microsoft_Word_template_2": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "fc359ca5-f154-422b-a918-44429bfb9de7"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_sharepointonline",
+                          "operationId": "CreateFile",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                        },
+                        "parameters": {
+                          "dataset": "https://govgrantsmanagedservice.sharepoint.com/sites/GLU-Sharepoint",
+                          "folderPath": "/Shared Documents/GLU - Document Library (DEV)/Templates",
+                          "name": "@{outputs('Get_Outcome_Template')?['body/gap_title']}.docx",
+                          "body": "@base64ToBinary(outputs('Get_file_content_using_id')?['body']?['$content'])"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      },
+                      "runtimeConfiguration": {
+                        "contentTransfer": {
+                          "transferMode": "Chunked"
+                        }
+                      }
+                    },
+                    "Create_file_2": {
+                      "runAfter": {
+                        "Create_file": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "fc359ca5-f154-422b-a918-44429bfb9de7"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_sharepointonline",
+                          "operationId": "CreateFile",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                        },
+                        "parameters": {
+                          "dataset": "https://govgrantsmanagedservice.sharepoint.com/sites/GLU-Sharepoint",
+                          "folderPath": "/Shared Documents/GLU - Document Library (DEV)/Templates",
+                          "name": "@{outputs('Get_Outcome_Template')?['body/gap_title']}.zip",
+                          "body": "@base64ToBinary(outputs('Get_file_content_using_id')?['body']?['$content'])"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      },
+                      "runtimeConfiguration": {
+                        "contentTransfer": {
+                          "transferMode": "Chunked"
+                        }
                       }
                     }
                   }
@@ -569,10 +710,229 @@
                 "operationMetadataId": "646f1079-7bc7-4032-a795-070081b9aef3"
               },
               "type": "Switch"
+            },
+            "Condition": {
+              "actions": {
+                "Retrieve_required_data": {
+                  "actions": {
+                    "Get_Applicant_Responses": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "835fee20-e6c3-4707-bde3-6bd07bc241f7"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps-1",
+                          "operationId": "PerformBoundAction",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "gap_applications",
+                          "actionName": "Microsoft.Dynamics.CRM.gap_ReformatApplicantResponses",
+                          "recordId": "@triggerOutputs()?['body/gap_applicationid']"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Extract_Question_Data": {
+                      "actions": {
+                        "Lead_Contact": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "da790b0b-a07d-49e8-8e7f-eeefc15023f7"
+                          },
+                          "type": "Query",
+                          "inputs": {
+                            "from": "@outputs('Applicant_Responses_Object')",
+                            "where": "@equals(item()?['Question'], 'Accountable Officer (Name and Job Title)')"
+                          }
+                        },
+                        "Lead_Contact_2": {
+                          "runAfter": {
+                            "Lead_Contact": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "1ec5bb60-b2d7-41d4-8410-eabf90e3ac97"
+                          },
+                          "type": "Query",
+                          "inputs": {
+                            "from": "@outputs('Applicant_Responses_Object')",
+                            "where": "@equals(item()?['Question'], 'Accountable Officer (Name and Job Title)')"
+                          }
+                        },
+                        "Lead_Contact_3": {
+                          "runAfter": {
+                            "Lead_Contact_2": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "745b1cc4-3827-4be5-be29-f380cad92dd5"
+                          },
+                          "type": "Query",
+                          "inputs": {
+                            "from": "@outputs('Applicant_Responses_Object')",
+                            "where": "@equals(item()?['Question'], 'Accountable Officer Contact phone number')"
+                          }
+                        },
+                        "Lead_Contact_4": {
+                          "runAfter": {
+                            "Lead_Contact_3": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "745b1cc4-3827-4be5-be29-f380cad92dd5"
+                          },
+                          "type": "Query",
+                          "inputs": {
+                            "from": "@outputs('Applicant_Responses_Object')",
+                            "where": "@equals(item()?['Question'], 'Head Office Postal Address')"
+                          }
+                        },
+                        "Project_Name": {
+                          "runAfter": {
+                            "Lead_Contact_4": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "745b1cc4-3827-4be5-be29-f380cad92dd5"
+                          },
+                          "type": "Query",
+                          "inputs": {
+                            "from": "@outputs('Applicant_Responses_Object')",
+                            "where": "@equals(item()?['Question'], 'Project Title')"
+                          }
+                        },
+                        "Append_to_Extract": {
+                          "runAfter": {
+                            "Project_Name": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "6656c738-3222-49ba-8b2e-596588bf3c4f"
+                          },
+                          "type": "AppendToArrayVariable",
+                          "inputs": {
+                            "name": "ResponsesExtracts",
+                            "value": "@if(empty(body('Lead_Contact')),'Not-Found',body('Lead_Contact')?[0]?['Answer'])"
+                          }
+                        },
+                        "Append_to_Extract_2": {
+                          "runAfter": {
+                            "Append_to_Extract": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "d63d8fa7-97e5-4b2a-bd21-3ce5acd18927"
+                          },
+                          "type": "AppendToArrayVariable",
+                          "inputs": {
+                            "name": "ResponsesExtracts",
+                            "value": "@if(empty(body('Lead_Contact_2')),'Not-Found',body('Lead_Contact_2')?[0]?['Answer'])"
+                          }
+                        },
+                        "Append_to_Extract_3": {
+                          "runAfter": {
+                            "Append_to_Extract_2": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "afd6bb0d-b980-4a49-abe8-499f913ff8a2"
+                          },
+                          "type": "AppendToArrayVariable",
+                          "inputs": {
+                            "name": "ResponsesExtracts",
+                            "value": "@if(empty(body('Lead_Contact_3')),'Not-Found',body('Lead_Contact_3')?[0]?['Answer'])"
+                          }
+                        },
+                        "Append_to_Extract_5": {
+                          "runAfter": {
+                            "Append_to_Extract_4": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "bf0f81ef-2b0a-4105-b4f3-4cb60e40f032"
+                          },
+                          "type": "AppendToArrayVariable",
+                          "inputs": {
+                            "name": "ResponsesExtracts",
+                            "value": "@if(empty(body('Project_Name')),'Not-Found',body('Project_Name')?[0]?['Answer'])"
+                          }
+                        },
+                        "Append_to_Extract_4": {
+                          "runAfter": {
+                            "Append_to_Extract_3": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "bf0f81ef-2b0a-4105-b4f3-4cb60e40f032"
+                          },
+                          "type": "AppendToArrayVariable",
+                          "inputs": {
+                            "name": "ResponsesExtracts",
+                            "value": "@if(empty(body('Lead_Contact_4')),'Not-Found',body('Lead_Contact_4')?[0]?['Answer'])"
+                          }
+                        }
+                      },
+                      "runAfter": {
+                        "Applicant_Responses_Object": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "ea6bfeb9-ebf4-4aef-a322-8a6ee51b4af9"
+                      },
+                      "type": "Scope"
+                    },
+                    "Applicant_Responses_Object": {
+                      "runAfter": {
+                        "Get_Applicant_Responses": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "2f18b28e-f491-4a94-beee-18dd30e49fe9"
+                      },
+                      "type": "Compose",
+                      "inputs": "@json(outputs('Get_Applicant_Responses')?['body/ProcessResult'])"
+                    }
+                  },
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "0941758d-370b-4ad7-a742-a4ca21b4fe4b"
+                  },
+                  "type": "Scope"
+                }
+              },
+              "runAfter": {
+                "Data_Init": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "equals": [
+                  "@true",
+                  "@false"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "2d0377ff-3edf-468e-af2d-3a84dfc4f4ab"
+              },
+              "type": "If"
             }
           },
           "runAfter": {
-            "Initialize_variable_4": [
+            "Initialize_ErrorMsg": [
               "Succeeded"
             ]
           },
@@ -580,6 +940,46 @@
             "operationMetadataId": "43708424-4064-45e4-be75-f567986b5dd8"
           },
           "type": "Scope"
+        },
+        "Initialize_ErrorMsg": {
+          "runAfter": {
+            "Initialize_BankHolidays": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "fb79e53b-6d00-4866-8345-6bf57a04a28c"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "ErrorMsg",
+                "type": "string",
+                "value": "Generating a Outcome letter has failed. Please check the Scheme has a Outcome letter template assigned, and application contains responses. Else, contact an administrator."
+              }
+            ]
+          }
+        },
+        "Initialize_BankHolidays": {
+          "runAfter": {
+            "Initialize_ResponsesExtracts": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "164f7675-8d9e-4d8a-9bc4-45338614b710"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "BankHolidays",
+                "type": "array",
+                "value": "@parameters('BankHolidays (gap_BankHolidays)')?['bankHolidays']"
+              }
+            ]
+          }
         }
       }
     },

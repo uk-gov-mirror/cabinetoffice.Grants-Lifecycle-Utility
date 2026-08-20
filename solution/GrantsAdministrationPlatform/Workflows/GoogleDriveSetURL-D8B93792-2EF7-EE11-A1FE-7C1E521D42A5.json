@@ -153,6 +153,7 @@
                 "parameters": {
                   "entityName": "gap_documents",
                   "recordId": "@triggerBody()?['gap_documentid']",
+                  "item/gap_documentcategory": "@triggerOutputs()?['body/gap_documentcategory']",
                   "item/gap_url": "@variables('URL')"
                 },
                 "authentication": "@parameters('$authentication')"

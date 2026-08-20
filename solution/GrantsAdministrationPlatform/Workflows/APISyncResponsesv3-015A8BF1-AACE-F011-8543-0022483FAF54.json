@@ -28,6 +28,15 @@
         "api": {
           "name": "shared_commondataserviceforapps"
         }
+      },
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "gap_sharedoffice365_7664a"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
       }
     },
     "definition": {
@@ -41,6 +50,22 @@
         "$authentication": {
           "defaultValue": {},
           "type": "SecureObject"
+        },
+        "GetApplicationsAPIMaxTime (gap_GetApplicationsAPIMaxTime)": {
+          "defaultValue": "PT5H",
+          "type": "String",
+          "metadata": {
+            "schemaName": "gap_GetApplicationsAPIMaxTime",
+            "description": "This value is used to set the max time that the Get Application loops can take in the  API | Sync Responses v3 flow"
+          }
+        },
+        "GetApplicationsAPIMaxLoops (gap_GetApplicationsAPIMaxLoops)": {
+          "defaultValue": 300,
+          "type": "Int",
+          "metadata": {
+            "schemaName": "gap_GetApplicationsAPIMaxLoops",
+            "description": "This value is used to set the max number of loops allowed in the  API | Sync Responses v3 flow"
+          }
         }
       },
       "triggers": {
@@ -129,7 +154,7 @@
         },
         "Data_|_Initialise_Is_Complete": {
           "runAfter": {
-            "Data_|_Initialise_Page": [
+            "Initialize_FlowStartTime": [
               "Succeeded"
             ]
           },
@@ -147,7 +172,7 @@
             ]
           }
         },
-        "Do_until": {
+        "Do_until_-_Loop_GetApplications": {
           "actions": {
             "Try": {
               "actions": {
@@ -657,8 +682,8 @@
           },
           "expression": "@equals(variables('Is Complete'),true)",
           "limit": {
-            "count": 60,
-            "timeout": "PT5H"
+            "count": "@parameters('GetApplicationsAPIMaxLoops (gap_GetApplicationsAPIMaxLoops)')",
+            "timeout": "@parameters('GetApplicationsAPIMaxTime (gap_GetApplicationsAPIMaxTime)')"
           },
           "metadata": {
             "operationMetadataId": "e5b412e8-8174-4ff7-8cc4-74905f11dd4a"
@@ -667,7 +692,7 @@
         },
         "Dataverse_|_Update_Scheme": {
           "runAfter": {
-            "Do_until": [
+            "Alert_Warning_Message_Condition__-_Close_to_max": [
               "Succeeded"
             ]
           },
@@ -791,6 +816,76 @@
           },
           "type": "Compose",
           "inputs": "@concat('|', join(body('Select_Submission_IDs'), '|'), '|')"
+        },
+        "Alert_Warning_Message_Condition__-_Close_to_max": {
+          "actions": {
+            "Send_an_email_Alert_(V2)": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "dd08204f-9268-431c-b90f-41b3757315bf"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_office365",
+                  "operationId": "SendEmailV2",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                },
+                "parameters": {
+                  "emailMessage/To": "contactglu@cabinetoffice.gov.uk",
+                  "emailMessage/Subject": "GLU ALERT - Number of Flow Runs reaching close to maximum",
+                  "emailMessage/Body": "<p>This is an automated message to notify GLU admins that the the number of pages retrieved from the Find and Apply is reaching the configurable maximum. Please update the Environment variables GetApplicationsAPIMaxLoops or GetApplicationsAPIMaxTime to increase this limit to prevent the Scheme: @{outputs('Update_Find_and_Apply_API_Status_|_200')?['body/gap_title']} from reaching a limit on the number of Applications it can import.<br>\n<br>\nUpdate the maximum by updating the Environment variables GetApplicationsAPIMaxLoops or GetApplicationsAPIMaxTime.<br>\nThe time has reached @{div(\r\n    sub(\r\n        ticks(utcNow()),\r\n        ticks(variables('FlowStartTime'))\r\n    ),\r\n    600000000\r\n)} minutes out of @{parameters('GetApplicationsAPIMaxTime (gap_GetApplicationsAPIMaxTime)')} and @{variables('Page')} loops out of @{parameters('GetApplicationsAPIMaxLoops (gap_GetApplicationsAPIMaxLoops)')}.<br>\n<br>\nKind Regards,<br>\nGLU Team</p>",
+                  "emailMessage/Importance": "High"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Do_until_-_Loop_GetApplications": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "or": [
+              {
+                "greater": [
+                  "@variables('Page')",
+                  "@int(mul(300, 0.9))"
+                ]
+              },
+              {
+                "equals": [
+                  "@less(\r\n    ticks(utcNow()),\r\n    ticks(addMinutes(variables('FlowStartTime'), 270))\r\n)",
+                  false
+                ]
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "75ff3919-f303-4753-b96b-b34308539072"
+          },
+          "type": "If"
+        },
+        "Initialize_FlowStartTime": {
+          "runAfter": {
+            "Data_|_Initialise_Page": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "235770bf-baf5-47c1-892d-b2efc57f8476"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "FlowStartTime",
+                "type": "string",
+                "value": "@{utcNow()}"
+              }
+            ]
+          }
         }
       }
     },

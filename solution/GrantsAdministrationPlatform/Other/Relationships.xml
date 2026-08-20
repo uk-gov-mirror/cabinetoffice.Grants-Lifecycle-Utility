@@ -95,7 +95,6 @@
   <EntityRelationship Name="gap_application_FinalReviewer_systemuser" />
   <EntityRelationship Name="gap_application_gap_Messages" />
   <EntityRelationship Name="gap_application_gap_Reviews" />
-  <EntityRelationship Name="gap_application_GeneratedOutcomeLetter_gap_document" />
   <EntityRelationship Name="gap_application_GFABankDetailsForm_gap_document" />
   <EntityRelationship Name="gap_application_GFAUnsigned_gap_document" />
   <EntityRelationship Name="gap_application_InitialReviewer_systemuser" />

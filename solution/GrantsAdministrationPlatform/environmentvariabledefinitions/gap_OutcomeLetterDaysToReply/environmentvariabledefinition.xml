@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="gap_OutcomeLetterDaysToReply">
+  <defaultvalue>2</defaultvalue>
+  <description default="This value represents the number of days that an outcome letter should be responded to in. It affects a value within the Generated Outcome Letter Templates. This should be a whole number of days, which will be added to the current date to indicate a deadline for the Outcome letter response.">
+    <label description="This value represents the number of days that an outcome letter should be responded to in. It affects a value within the Generated Outcome Letter Templates. This should be a whole number of days, which will be added to the current date to indicate a deadline for the Outcome letter response." languagecode="1033" />
+  </description>
+  <displayname default="OutcomeLetterDaysToReply">
+    <label description="OutcomeLetterDaysToReply" languagecode="1033" />
+  </displayname>
+  <introducedversion>7.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000001</type>
+</environmentvariabledefinition>

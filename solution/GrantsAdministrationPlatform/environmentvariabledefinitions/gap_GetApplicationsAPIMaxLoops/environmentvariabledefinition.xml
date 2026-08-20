@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="gap_GetApplicationsAPIMaxLoops">
+  <defaultvalue>300</defaultvalue>
+  <description default="This value is used to set the max number of loops allowed in the  API | Sync Responses v3 flow">
+    <label description="This value is used to set the max number of loops allowed in the  API | Sync Responses v3 flow" languagecode="1033" />
+  </description>
+  <displayname default="GetApplicationsAPIMaxLoops">
+    <label description="GetApplicationsAPIMaxLoops" languagecode="1033" />
+  </displayname>
+  <introducedversion>7.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000001</type>
+</environmentvariabledefinition>

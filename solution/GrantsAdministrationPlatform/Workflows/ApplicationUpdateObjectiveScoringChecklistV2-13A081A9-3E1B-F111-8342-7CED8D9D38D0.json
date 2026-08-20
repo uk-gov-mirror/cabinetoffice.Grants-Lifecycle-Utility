@@ -511,7 +511,7 @@
                                       "item/gap_aiprompt": "@items('Apply_to_each_6')?['cr705_aiprompt']",
                                       "item/gap_Application@odata.bind": "gap_applications(@{items('Apply_to_each')?['gap_applicationid']})",
                                       "item/gap_automationtype": "@items('Apply_to_each_6')?['cr705_automationtype']",
-                                      "item/gap_checklistquestiontype": "@items('Apply_to_each_6')?['gap_questiontemplatetype']",
+                                      "item/gap_checklistquestiontype": "@outputs('Get_Missing_Section')?['body/gap_sectiontemplatetype@OData.Community.Display.V1.FormattedValue']",
                                       "item/gap_choiceoptions": "@items('Apply_to_each_6')?['gap_choiceoptions']",
                                       "item/gap_conditionalapplicablequestion": "@items('Apply_to_each_6')?['gap_conditionalapplicablequestion']",
                                       "item/gap_conditionalautomationenabled": "@items('Apply_to_each_6')?['gap_conditionalautomationenabled']",
@@ -519,7 +519,8 @@
                                       "item/gap_description": "@items('Apply_to_each_6')?['gap_description']",
                                       "item/gap_order": "@items('Apply_to_each_6')?['gap_order']",
                                       "item/gap_responsemappingjson": "@items('Apply_to_each_6')?['gap_responsemappingjson']",
-                                      "item/gap_Section@odata.bind": "gap_scoringchecklistsections(@{outputs('Add_New_Checklist_Section')?['body/gap_scoringchecklistsectionid']})"
+                                      "item/gap_Section@odata.bind": "gap_scoringchecklistsections(@{outputs('Add_New_Checklist_Section')?['body/gap_scoringchecklistsectionid']})",
+                                      "item/gap_weight": "@items('Apply_to_each_6')?['gap_weight']"
                                     },
                                     "authentication": "@parameters('$authentication')"
                                   }
@@ -918,7 +919,7 @@
                                           "item/gap_aiprompt": "@outputs('Get_Scoring_Template_Question')?['body/cr705_aiprompt']",
                                           "item/gap_Application@odata.bind": "gap_applications(@{items('Apply_to_each')?['gap_applicationid']})",
                                           "item/gap_automationtype": "@outputs('Get_Scoring_Template_Question')?['body/cr705_automationtype']",
-                                          "item/gap_checklistquestiontype": "@outputs('Get_Scoring_Template_Question')?['body/gap_questiontemplatetype']",
+                                          "item/gap_checklistquestiontype": "@variables('Existing Sections')?['gap_sectiontemplatetype@OData.Community.Display.V1.FormattedValue']",
                                           "item/gap_choiceoptions": "@outputs('Get_Scoring_Template_Question')?['body/gap_choiceoptions']",
                                           "item/gap_conditionalapplicablequestion": "@outputs('Get_Scoring_Template_Question')?['body/gap_conditionalapplicablequestion']",
                                           "item/gap_conditionalautomationenabled": "@outputs('Get_Scoring_Template_Question')?['body/gap_conditionalautomationenabled']",
@@ -926,7 +927,8 @@
                                           "item/gap_description": "@outputs('Get_Scoring_Template_Question')?['body/gap_description']",
                                           "item/gap_order": "@outputs('Get_Scoring_Template_Question')?['body/gap_order']",
                                           "item/gap_responsemappingjson": "@outputs('Get_Scoring_Template_Question')?['body/gap_responsemappingjson']",
-                                          "item/gap_Section@odata.bind": "gap_scoringchecklistsections(@{items('Apply_to_each_8')?['ChecklistGUID']})"
+                                          "item/gap_Section@odata.bind": "gap_scoringchecklistsections(@{items('Apply_to_each_8')?['ChecklistGUID']})",
+                                          "item/gap_weight": "@outputs('Get_Scoring_Template_Question')?['body/gap_weight']"
                                         },
                                         "authentication": "@parameters('$authentication')"
                                       }
