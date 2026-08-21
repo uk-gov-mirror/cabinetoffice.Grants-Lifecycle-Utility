@@ -442,28 +442,12 @@
       <statecode>0</statecode>
       <statuscode>1</statuscode>
     </connectionreference>
-    <connectionreference connectionreferencelogicalname="gap_sharedcommondataserviceforapps_9807c">
-      <connectionreferencedisplayname>Microsoft Dataverse GrantsAdministrationPlatform-9807c</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
     <connectionreference connectionreferencelogicalname="gap_sharedgap5fdvla20api5fd78db9986efe513d_0e4e8">
       <connectionreferencedisplayname>DVLA Vehicle Enquiry Service API</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_gap-5fdvla-20api-5fd78db9986efe513d</connectorid>
       <customconnectorid>
         <connectorid>685f5bf7-438f-4974-89aa-2d98d88b498c</connectorid>
       </customconnectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="gap_sharedgoogledrive_cc814">
-      <connectionreferencedisplayname>Google Drive GrantsAdministrationPlatform-cc814</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_googledrive</connectorid>
       <iscustomizable>1</iscustomizable>
       <promptingbehavior>0</promptingbehavior>
       <statecode>0</statecode>

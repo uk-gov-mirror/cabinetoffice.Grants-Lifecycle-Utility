@@ -1384,14 +1384,6 @@
         <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=gap__msdyn_Mscrm.Form.Copilot.Summarize!gap_DEMO!gap_application!0,appactionruleid.uniquename=msdyn_Mscrm.IsAppCopilotEnabled!0" id.appactionid.uniquename="gap__msdyn_Mscrm.Form.Copilot.Summarize!gap_DEMO!gap_application!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsAppCopilotEnabled!0" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="connectionreference" displayName="gap_sharedgoogledrive_280ac" solution="Active" id.connectionreferencelogicalname="gap_sharedgoogledrive_280ac" />
-        <Dependent type="29" displayName="Application | Outcome Letter Generation | Document Generation" id="{bfc55281-d786-f111-8077-000d3ad684d9}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="new_sharedcommondataserviceforapps_90773" solution="Active" id.connectionreferencelogicalname="new_sharedcommondataserviceforapps_90773" />
-        <Dependent type="29" displayName="Application | Outcome Letter Generation | Document Generation" id="{bfc55281-d786-f111-8077-000d3ad684d9}" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="EnvironmentVariableDefinition" displayName="gap_DVLAEndpointURL" solution="Active" id.schemaname="gap_DVLAEndpointURL" />
         <Dependent type="372" schemaName="gap_5Fdvla-20api" displayName="DVLA API" id="{685f5bf7-438f-4974-89aa-2d98d88b498c}" />
       </MissingDependency>
